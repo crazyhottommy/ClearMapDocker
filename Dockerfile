@@ -27,29 +27,31 @@ RUN pip install numpy
 # Copy additional ClearMap resources.
 # Included in the docker repo to combat any future 
 # changes to the iDisco website.
-RUN wget https://idiscodotinfo.files.wordpress.com/2016/05/clearmap_ressources_mouse_brain.zip
-RUN unzip clearmap_ressources_mouse_brain.zip
-RUN rm clearmap_ressources_mouse_brain.zip
-RUN rm -r __MACOSX
-RUN mv ClearMap_ressources resources
+RUN curl -O -J -L https://osf.io/c7qm6/download
+RUN tar xvzf ClearMap_ressources.tar.gz
+RUN rm ClearMap_ressources.tar.gz
 
 # Programmatically set the version of Elastix to pull.
 ENV ElastixVersion "4.9.0"
 
 # Download a release of Elastix. 
 # Development deemed stable (July, 2018).
+RUN mkdir elastix
+RUN cd elastix
 RUN wget https://github.com/SuperElastix/elastix/releases/download/${ElastixVersion}/elastix-${ElastixVersion}-linux.tar.bz2
 RUN tar xvjf elastix-4.9.0-linux.tar.bz2
 RUN rm elastix-4.9.0-linux.tar.bz2
 
-# Cleaning / reorganizing binaries and libraries.
-RUN mv bin/* /bin
-RUN mv lib/* /lib
-RUN rm -r bin && rm -r lib
-
-# Keeping the original license (good practice).
-RUN mkdir elastix_metadata
-RUN mv LICENSE elastix_metadata && mv NOTICE elastix_metadata
+## Download ilastik
+##d ownload Version 1.2.2 (based on Python 2) for ilastik
+## https://www.ilastik.org/download.html
+# it says in the settings.py from ClearMap, we need to download ilastik 0.5 from http://old.ilastik.org/index.php?cat=Download
+## download ilastik
+RUN cd /clearmap
+RUN mkdir ilastik; cd ilastik
+RUN wget http://files.ilastik.org/ilastik-1.2.2post2-Linux.tar.bz2
+RUN tar xvjf ilastik-1.2.2post2-Linux.tar.bz2
+RUN rm ilastik-1.2.2post2-Linux.tar.bz2
 
 # Updating the bashrc
 RUN echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/lib" >> ~/.bashrc
