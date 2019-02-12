@@ -11,7 +11,7 @@ $`docker --version`
 ## Build
 Navigate to this repository. 
 
-$`docker build .` -t clearmap
+$`docker build . -t clearmap`
 
 ## Run
 $`docker run -it <BUILD HASH > bash`
