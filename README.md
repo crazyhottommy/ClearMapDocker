@@ -16,6 +16,6 @@ $`docker build . -t clearmap`
 ## Run
 $`docker run -it <BUILD HASH > bash`
 
-## test data
+## Test data
 
 https://github.com/crazyhottommy/ClearMap_data
