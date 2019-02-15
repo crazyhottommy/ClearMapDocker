@@ -24,9 +24,11 @@ export DOCKER_ID_USER="crazyhottommy"
 docker login
 docker tag clearmap crazyhottommy/clearmap
 docker push crazyhottommy/clearmap
+```
 
-## on HPC
-## follow instructions https://www.rc.fas.harvard.edu/resources/documentation/software/singularity-on-odyssey/
+###  on HPC
+follow instructions https://www.rc.fas.harvard.edu/resources/documentation/software/singularity-on-odyssey/
+```bash
 ssh bio1
 mkdir clearmap_singularity; cd !$
 singularity pull docker://crazyhottommy/clearmap
