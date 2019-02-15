@@ -26,6 +26,7 @@ docker tag clearmap crazyhottommy/clearmap
 docker push crazyhottommy/clearmap
 
 ## on HPC
+## follow instructions https://www.rc.fas.harvard.edu/resources/documentation/software/singularity-on-odyssey/
 ssh bio1
 mkdir clearmap_singularity; cd !$
 singularity pull docker://crazyhottommy/clearmap
